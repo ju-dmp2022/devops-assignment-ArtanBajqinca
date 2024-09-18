@@ -1,3 +1,4 @@
+assertpy
 fastapi
 pydantic
 uvicorn
