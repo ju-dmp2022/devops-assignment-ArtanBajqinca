@@ -19,14 +19,17 @@ class Calculation(BaseModel):
     def calculate(self):
         calc = CalculatorHelper()
         do = {
-                Opertions.add:calc.add,
-                Opertions.subtract:calc.subtract,
-                Opertions.multiply:calc.multiply,
-                Opertions.divide:calc.divide
+            Opertions.add: calc.add,
+            Opertions.subtract: calc.subtract,
+            Opertions.multiply: calc.multiply,
+            Opertions.divide: calc.divide
         }
+        
+        if self.operation == Opertions.divide and self.operand2 == 0:
+            raise ValueError("Division by zero is not allowed")
+        
         result = do[self.operation](self.operand1, self.operand2)
-        response = ResultResponse()
-        response.result = result
+        response = ResultResponse(result=result)
         return response
 
 class User(BaseModel):
@@ -52,9 +55,9 @@ class User(BaseModel):
         return response
 
 class ResultResponse(BaseModel):
-    result: float = None
+    result: float
 
 class UserResponse(BaseModel):
-    username: str = None
+    username: str
 
 

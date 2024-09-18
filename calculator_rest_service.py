@@ -1,26 +1,13 @@
-import time
-from fastapi import FastAPI
+# BE/calculator_rest_service.py
+
+import logging
+from fastapi import FastAPI, HTTPException, logger
 from fastapi.middleware.cors import CORSMiddleware
 from starlette.responses import JSONResponse
-from fastapi import HTTPException
-import numpy as np
-
 from calculator_helper import CalculatorHelper
+from models import Calculation, ResultResponse, ErrorResponse, User, UserResponse
 
-from models import Calculation, User, ResultResponse, UserResponse, ErrorResponse
-
-def normal_dist_sleep(mean=2, stddev=1, min_sleep=1, max_sleep=4):
-    while True:
-        # Generate a sleep time from a normal distribution
-        sleep_time = np.random.normal(mean, stddev)
-        # Check if the sleep time is within the allowed range
-        if min_sleep <= sleep_time <= max_sleep:
-            break  # If it's within the range, proceed
-
-    # Sleep for the computed duration
-    time.sleep(sleep_time)
-
-# init FastAPI app
+# Initialize FastAPI app
 app = FastAPI(title='Calculator', docs_url='/', description="Calculator API", version='1.0.0')
 
 # Configure CORS
@@ -32,20 +19,22 @@ app.add_middleware(
     allow_headers=["*"],  # Allows all headers
 )
 
-# defining exceptional JSON-response
+# Define exceptional JSON-response
 @app.exception_handler(Exception)
 async def error_handler(request, exc):
     return JSONResponse({
         'detail': f'{exc}'
     })
 
-@app.post('/calculate', operation_id='calculate', summary='Basic arithmetic calculation', response_model=ResultResponse, tags=["actions"], responses={500: {"model": ErrorResponse}})
+@app.post("/calculate", response_model=ResultResponse)
 async def calc(body: Calculation):
     try:
+        logging.info(f"Received calculation request: {body}")
         result = body.calculate()
         return result
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+    except ValueError as e:
+        logging.error(f"Calculation error: {e}")
+        raise HTTPException(status_code=400, detail=str(e))
 
 @app.post('/register', operation_id='register', summary='Register new user', response_model=UserResponse, tags=["actions"], responses={409: {"model": ErrorResponse}, 500: {"model": ErrorResponse}})
 async def register(body: User):
@@ -62,7 +51,6 @@ async def register(body: User):
 async def login(body: User):
     try:
         result = body.login()
-        normal_dist_sleep()
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
     if result is None:
@@ -119,7 +107,7 @@ def main(args):
 
     parser = argparse.ArgumentParser(description='Calculator server')
 
-    parser.add_argument('--port', type=int, default='5000', help='Port, 5000 is default')
+    parser.add_argument('--port', type=int, default='5001', help='Port, 5001 is default')
     parser.add_argument("--loglevel", **ifenv('LOGLEVEL', 'DEBUG'), choices=['DEBUG', 'INFO', 'WARNING', 'ERROR', 'CRITICAL'], help="Set Flask logging level, DEBUG is default")
     parser.add_argument('--debug', action='store_true', help='Flask debug')
     parser.add_argument('--no-debug', dest='debug', action='store_false', help='Flask no debug is default')
