@@ -32,12 +32,10 @@ jobs:
         run: pytest --junit-xml=report.xml
 
       - name: Publish test report
-        uses: dorny/test-reporter@v1
+        uses: mikepenz/action-junit-report@v3
         if: always()
         with:
-          name: Pytest results
-          path: report.xml
-          reporter: junit
+          report_paths: "**/report.xml"
 
       - name: Log in to Azure Container Registry
         if: success()
