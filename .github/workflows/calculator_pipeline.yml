@@ -19,14 +19,14 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pip install -r BE/requirements.txt
+          pip install -r requirements.txt
           pip install pytest requests openapi-python-client
 
       - name: Set PYTHONPATH
         run: echo "PYTHONPATH=." >> $GITHUB_ENV
 
       - name: Start REST API
-        run: python BE/calculator_rest_service.py --rest &
+        run: python calculator_rest_service.py --rest &
 
       - name: Run tests
         run: pytest --junit-xml=report.xml

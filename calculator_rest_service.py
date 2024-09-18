@@ -1,4 +1,3 @@
-# BE/calculator_rest_service.py
 
 import logging
 from fastapi import FastAPI, HTTPException, logger
