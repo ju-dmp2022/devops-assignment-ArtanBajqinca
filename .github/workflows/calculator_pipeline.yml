@@ -37,7 +37,7 @@ jobs:
         with:
           name: Pytest results
           path: report.xml
-          reporter: junit
+          reporter: junit-xml
 
       - name: Log in to Azure Container Registry
         if: success()
