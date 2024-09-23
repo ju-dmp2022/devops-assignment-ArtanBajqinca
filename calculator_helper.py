@@ -5,7 +5,7 @@ class CalculatorHelper():
         }
     }
 
-# Comment so github actions can detect the change and run me throguh the pipeline 1
+# CD/CI test 11
 
     _instance = None
     _is_initialized = False
