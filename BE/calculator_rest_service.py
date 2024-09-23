@@ -6,7 +6,8 @@ from starlette.responses import JSONResponse
 from calculator_helper import CalculatorHelper
 from models import Calculation, ResultResponse, ErrorResponse, User, UserResponse
 
-app = FastAPI(title='Calculator', docs_url='/', description="Calculator API", version='1.0.0')
+app = FastAPI(title='Calculator', docs_url='/',
+              description="Calculator API", version='1.0.0')
 
 # Configure CORS
 app.add_middleware(
@@ -18,11 +19,14 @@ app.add_middleware(
 )
 
 # Define exceptional JSON-response
+
+
 @app.exception_handler(Exception)
 async def error_handler(request, exc):
     return JSONResponse({
         'detail': f'{exc}'
     })
+
 
 @app.post("/calculate", response_model=ResultResponse)
 async def calc(body: Calculation):
@@ -33,6 +37,7 @@ async def calc(body: Calculation):
     except ValueError as e:
         logging.error(f"Calculation error: {e}")
         raise HTTPException(status_code=400, detail=str(e))
+
 
 @app.post('/register', operation_id='register', summary='Register new user', response_model=UserResponse, tags=["actions"], responses={409: {"model": ErrorResponse}, 500: {"model": ErrorResponse}})
 async def register(body: User):
@@ -52,8 +57,10 @@ async def login(body: User):
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
     if result is None:
-        raise HTTPException(status_code=400, detail='Wrong username of password.')
+        raise HTTPException(
+            status_code=400, detail='Wrong username of password.')
     return result
+
 
 @app.get('/users/current', operation_id='users_current', summary='Get current logged in user', response_model=UserResponse, tags=["actions"], responses={204: {"model": None}, 500: {"model": ErrorResponse}})
 async def users_current():
@@ -92,6 +99,7 @@ async def logout():
         raise HTTPException(status_code=204, detail='No user has signed in.')
     return result
 
+
 def main(args):
     import os
     import uvicorn
@@ -105,20 +113,23 @@ def main(args):
 
     parser = argparse.ArgumentParser(description='Calculator server')
 
-    parser.add_argument('--port', type=int, default='5001', help='Port, 5001 is default')
-    parser.add_argument("--loglevel", **ifenv('LOGLEVEL', 'DEBUG'), choices=['DEBUG', 'INFO', 'WARNING', 'ERROR', 'CRITICAL'], help="Set Flask logging level, DEBUG is default")
+    parser.add_argument('--port', type=int, default='5001',
+                        help='Port, 5001 is default')
+    parser.add_argument("--loglevel", **ifenv('LOGLEVEL', 'DEBUG'), choices=[
+                        'DEBUG', 'INFO', 'WARNING', 'ERROR', 'CRITICAL'], help="Set Flask logging level, DEBUG is default")
     parser.add_argument('--debug', action='store_true', help='Flask debug')
-    parser.add_argument('--no-debug', dest='debug', action='store_false', help='Flask no debug is default')
+    parser.add_argument('--no-debug', dest='debug',
+                        action='store_false', help='Flask no debug is default')
     parser.add_argument('-r', '--rest', action='store_true')
     parser.set_defaults(debug=True)
 
     args = parser.parse_args()
 
     # Listen on all network interfaces
-    #app.run('0.0.0.0', port=args.flask_port, debug=args.debug)
+    # app.run('0.0.0.0', port=args.flask_port, debug=args.debug)
     uvicorn.run(app, host="0.0.0.0", port=args.port)
+
 
 if __name__ == '__main__':
     import sys
     main(sys.argv[1:])
-
