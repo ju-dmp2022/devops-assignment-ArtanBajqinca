@@ -51,4 +51,4 @@ jobs:
 
       - name: Push Docker image
         if: success()
-        run: docker push judevops.azurecr.io/artan_bajqinca-calculator:latest
+        run: docker push judevops.azurecr.io/artan_bajqinca-calculator:latest ./BE
