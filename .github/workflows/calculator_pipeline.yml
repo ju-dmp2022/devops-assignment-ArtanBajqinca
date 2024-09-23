@@ -27,10 +27,14 @@ jobs:
         run: echo "PYTHONPATH=$PYTHONPATH:$(pwd)/BE" >> $GITHUB_ENV
 
       - name: Start REST API
-        run: python calculator_rest_service.py --rest &
+        run: |
+          cd BE
+          python calculator_rest_service.py --rest &
 
       - name: Run tests
-        run: pytest --junit-xml=report.xml
+        run: |
+          cd BE
+          pytest --junit-xml=report.xml
 
       - name: Publish test report
         uses: mikepenz/action-junit-report@v3
