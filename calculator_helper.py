@@ -5,6 +5,8 @@ class CalculatorHelper():
         }
     }
 
+# Comment so github actions can detect the change and run me throguh the pipeline
+
     _instance = None
     _is_initialized = False
 
@@ -17,7 +19,7 @@ class CalculatorHelper():
         if not self._is_initialized:
             self._user_list = []
             self._current_user = None
-            admin = self.User('admin','test1234')
+            admin = self.User('admin', 'test1234')
             self._user_list.append(admin)
             self._is_initialized = True
 
@@ -42,7 +44,7 @@ class CalculatorHelper():
         if b == 0:
             raise ValueError("Division by zero is not allowed")
         return a / b
-    
+
     def calculate(self, operation, operand1, operand2):
         if operation == 'add':
             return self.add(operand1, operand2)
