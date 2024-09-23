@@ -5,7 +5,7 @@ class CalculatorHelper():
         }
     }
 
-# CD/CI test 1
+# CD/CI lab 2
 
     _instance = None
     _is_initialized = False
