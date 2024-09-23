@@ -6,7 +6,6 @@ from starlette.responses import JSONResponse
 from calculator_helper import CalculatorHelper
 from models import Calculation, ResultResponse, ErrorResponse, User, UserResponse
 
-# Initialize FastAPI app
 app = FastAPI(title='Calculator', docs_url='/', description="Calculator API", version='1.0.0')
 
 # Configure CORS
