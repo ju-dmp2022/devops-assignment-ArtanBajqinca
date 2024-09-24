@@ -7,11 +7,6 @@ WORKDIR /app
 # Copy the current directory contents into the container at /app
 COPY . /app
 
-# Install any needed packages specified in requirements.txt
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install -r requirements.txt
 
-# Make the calculator.py file executable
-RUN chmod +x calculator.py
-
-# Define the command to run the application when the container starts
-ENTRYPOINT ["python", "calculator_rest_service.py", "--port=5001"]
+ENTRYPOINT ["python", "calculator_rest_service.py", "--port=5001"] 

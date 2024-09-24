@@ -1,14 +1,16 @@
-from tests.web.pages.page_base import PageBase
-from tests.web.helpers.element import Element
+from .page_base import PageBase
+from web.helpers.element import Element
 from munch import munchify
 
 
 class LoginPage(PageBase):
     def __init__(self, driver):
-        PageBase.__init__(self, driver = driver)
+        PageBase.__init__(self, driver=driver)
 
-        self.page_elements = {
-            'username': Element('//input[@id="username"]', self),
+        page_elements = {
+            "username": Element('//input[@id="username"]', self),
+            "password": Element('//input[@id="password"]', self),
+            "login": Element('//button[@id="login"]', self),
         }
 
-        self.elements = munchify(self.page_elements)
+        self.elements = munchify(page_elements)

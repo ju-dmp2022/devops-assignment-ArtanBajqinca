@@ -1,4 +1,3 @@
-# test/test_calculator_api.py
 import pytest
 from calculator_client.client import Client
 from calculator_client.models.calculation import Calculation
