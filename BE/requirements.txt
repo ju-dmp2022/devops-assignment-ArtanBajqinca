@@ -5,3 +5,4 @@ uvicorn
 numpy
 argparse
 opencensus-ext-azure
+selenium
