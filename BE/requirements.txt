@@ -6,3 +6,7 @@ numpy
 argparse
 opencensus-ext-azure
 selenium
+munch
+selenium
+webdriver-manager
+assertpy
