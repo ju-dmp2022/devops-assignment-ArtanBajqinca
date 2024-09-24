@@ -14,4 +14,4 @@ RUN pip install --no-cache-dir -r requirements.txt
 RUN chmod +x calculator.py
 
 # Define the command to run the application when the container starts
-ENTRYPOINT ["python", "calculator.py"]
+ENTRYPOINT ["python", "calculator_rest_service.py", "--port=5001"]
