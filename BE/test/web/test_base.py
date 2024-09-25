@@ -1,8 +1,8 @@
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service as ChromeService
 from webdriver_manager.chrome import ChromeDriverManager
-from BE.test.calculator_client.api.actions import logout
-from BE.test.calculator_client.client import Client
+from calculator_client.api.actions import logout
+from calculator_client import Client
 
 
 class WebBase:
@@ -33,4 +33,3 @@ class WebBase:
             Stop the driver
         """
         self.driver.quit()
-        #
