@@ -1,13 +1,17 @@
-name: CI
+name: CI/CD Pipeline
+
 on:
   push:
-    branches: ["master"]
+    branches:
+      - main
   pull_request:
-    branches: ["master"]
-  workflow_dispatch:
+    branches:
+      - main
+
 jobs:
-  build-and-push:
+  build-and-test:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -15,21 +19,22 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v2
         with:
-          python-version: "3.12"
+          python-version: "3.8"
 
-      - name: Install dependencies
+      - name: Install Python packages
         run: |
-          cd BE
-          pip install -r requirements.txt
-          pip install pytest requests openapi-python-client
+          python -m pip install --upgrade pip
+          pip install -r BE/requirements.txt
+          pip install selenium munch
 
-      - name: Set PYTHONPATH
-        run: echo "PYTHONPATH=$PYTHONPATH:$(pwd)/BE" >> $GITHUB_ENV
+      - name: Start Selenium Docker node
+        run: docker run --name selenium -d --add-host=host.docker.internal:host-gateway -p 4444:4444 -p 5900:5900 --shm-size="2g" selenium/standalone-chrome:4.2.1-20220531
 
-      - name: Start REST API
-        run: |
-          cd BE
-          python calculator_rest_service.py --rest &
+      - name: Wait for Selenium to be ready
+        run: sleep 10
+
+      - name: Start Calculator front-end and back-end
+        run: docker compose -p webcalculator up -d
 
       - name: Run tests
         run: |
