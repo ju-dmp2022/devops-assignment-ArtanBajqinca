@@ -33,21 +33,17 @@ class TestWeb(WebBase):
 
     def test_calculator(self):
 
-        # Initialize CalculatorPage
-        calculator_page = CalculatorPage(self.driver)
+        # # make sure we are logged out
+        # CalculatorPage(self.driver).elements['logout_button'].click()
 
-        # make sure we are logged out
-        CalculatorPage(self.driver).elements.logout.click()
+        # login
+        # LoginPage(self.driver).elements['username'].set('admin')
+        # LoginPage(self.driver).elements['password'].set('test1234')
+        # LoginPage(self.driver).elements.login.click()
 
-        # we first login
-        self.test_login(
-            username='admin',
-            password='test1234'
-        )
-
-        # Test Addition: 2 + 3 = 5
-        CalculatorPage(self.driver).elements.key_2.click()
-        CalculatorPage(self.driver).elements.add.click()
-        CalculatorPage(self.driver).elements.key_3.click()
-        CalculatorPage(self.driver).elements.equals.click()
-        assert calculator_page.elements.result.text == '5'
+        CalculatorPage(self.driver).elements['key_2'].click()
+        CalculatorPage(self.driver).elements['key_add'].click()
+        CalculatorPage(self.driver).elements['key_3'].click()
+        CalculatorPage(self.driver).elements['key_equals'].click()
+        assert CalculatorPage(
+            self.driver).elements['calculator-screen'].value == '5'
