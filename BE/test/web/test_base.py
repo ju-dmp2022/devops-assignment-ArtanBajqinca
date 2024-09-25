@@ -33,3 +33,4 @@ class WebBase:
             Stop the driver
         """
         self.driver.quit()
+        #
