@@ -27,7 +27,7 @@ class CalculatorPage(PageBase):
             "logout_button": Element('//button[@id="logout"]', self),
             "toggle_history_button": Element('//button[@id="toggle-button"]', self),
             "history_textarea": Element('//textarea[@id="history"]', self),
-            "calculator-screen": Element('//input[@id="calculator-screen"]', self)
+            "calculator_screen": Element('//input[@id="calculator-screen"]', self)
         }
 
         self.elements = munchify(page_elements)

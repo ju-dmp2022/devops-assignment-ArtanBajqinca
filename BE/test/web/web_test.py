@@ -33,13 +33,10 @@ class TestWeb(WebBase):
 
     def test_calculator(self):
 
-        # # make sure we are logged out
-        # CalculatorPage(self.driver).elements['logout_button'].click()
-
         # login
-        # LoginPage(self.driver).elements['username'].set('admin')
-        # LoginPage(self.driver).elements['password'].set('test1234')
-        # LoginPage(self.driver).elements.login.click()
+        LoginPage(self.driver).elements['username'].set('admin')
+        LoginPage(self.driver).elements['password'].set('test1234')
+        LoginPage(self.driver).elements.login.click()
 
         # add
         CalculatorPage(self.driver).elements['key_2'].click()
@@ -47,7 +44,7 @@ class TestWeb(WebBase):
         CalculatorPage(self.driver).elements['key_3'].click()
         CalculatorPage(self.driver).elements['key_equals'].click()
         assert CalculatorPage(
-            self.driver).elements['calculator-screen'].value == '5'
+            self.driver).elements['calculator_screen'].value == '5'
 
         # subtract
         CalculatorPage(self.driver).elements['key_7'].click()
@@ -55,7 +52,7 @@ class TestWeb(WebBase):
         CalculatorPage(self.driver).elements['key_4'].click()
         CalculatorPage(self.driver).elements['key_equals'].click()
         assert CalculatorPage(
-            self.driver).elements['calculator-screen'].value == '3'
+            self.driver).elements['calculator_screen'].value == '3'
 
         # multiply
         CalculatorPage(self.driver).elements['key_2'].click()
@@ -63,7 +60,7 @@ class TestWeb(WebBase):
         CalculatorPage(self.driver).elements['key_3'].click()
         CalculatorPage(self.driver).elements['key_equals'].click()
         assert CalculatorPage(
-            self.driver).elements['calculator-screen'].value == '6'
+            self.driver).elements['calculator_screen'].value == '6'
 
         # divide
         CalculatorPage(self.driver).elements['key_6'].click()
@@ -71,7 +68,7 @@ class TestWeb(WebBase):
         CalculatorPage(self.driver).elements['key_3'].click()
         CalculatorPage(self.driver).elements['key_equals'].click()
         assert CalculatorPage(
-            self.driver).elements['calculator-screen'].value == '2'
+            self.driver).elements['calculator_screen'].value == '2'
 
     def test_history(self):
 
