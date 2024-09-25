@@ -1,6 +1,8 @@
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service as ChromeService
 from webdriver_manager.chrome import ChromeDriverManager
+from BE.test.calculator_client.api.actions import logout
+from BE.test.calculator_client.client import Client
 
 
 class WebBase:
@@ -16,6 +18,7 @@ class WebBase:
         """ Setup to run before every test
             Initiate a new driver.
         """
+        logout.sync(client=Client(base_url="http://localhost:5001"))
         chrome_options = webdriver.ChromeOptions()
         chrome_options.add_argument("--disable-search-engine-choice-screen")
         self.driver = webdriver.Chrome(service=ChromeService(
