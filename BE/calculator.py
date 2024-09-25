@@ -4,8 +4,8 @@ from calculator_helper import CalculatorHelper
 import calculator_rest_service
 
 parser = argparse.ArgumentParser(prog='ProgramName',
-      formatter_class=argparse.RawDescriptionHelpFormatter,
-      epilog=('''Example of usage: python calculator.py --add 1 2'''))
+                                 formatter_class=argparse.RawDescriptionHelpFormatter,
+                                 epilog=('''Example of usage: python calculator.py --add 1 2'''))
 parser.add_argument('-a', '--add',
                     nargs='+',
                     type=float,
@@ -45,7 +45,6 @@ if not args.rest and len(sys.argv) != 4:
 
 if (args.add):
     result = CalculatorHelper().add(args.add[0], args.add[1])
-    print("demo_three!")
     print(f'{args.add[0]}+{args.add[1]}={result}')
 elif (args.subtract):
     result = CalculatorHelper().subtract(args.subtract[0], args.subtract[1])

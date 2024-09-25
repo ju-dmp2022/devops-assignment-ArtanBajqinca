@@ -41,9 +41,48 @@ class TestWeb(WebBase):
         # LoginPage(self.driver).elements['password'].set('test1234')
         # LoginPage(self.driver).elements.login.click()
 
+        # add
         CalculatorPage(self.driver).elements['key_2'].click()
         CalculatorPage(self.driver).elements['key_add'].click()
         CalculatorPage(self.driver).elements['key_3'].click()
         CalculatorPage(self.driver).elements['key_equals'].click()
         assert CalculatorPage(
             self.driver).elements['calculator-screen'].value == '5'
+
+        # subtract
+        CalculatorPage(self.driver).elements['key_7'].click()
+        CalculatorPage(self.driver).elements['key_subtract'].click()
+        CalculatorPage(self.driver).elements['key_4'].click()
+        CalculatorPage(self.driver).elements['key_equals'].click()
+        assert CalculatorPage(
+            self.driver).elements['calculator-screen'].value == '3'
+
+        # multiply
+        CalculatorPage(self.driver).elements['key_2'].click()
+        CalculatorPage(self.driver).elements['key_multiply'].click()
+        CalculatorPage(self.driver).elements['key_3'].click()
+        CalculatorPage(self.driver).elements['key_equals'].click()
+        assert CalculatorPage(
+            self.driver).elements['calculator-screen'].value == '6'
+
+        # divide
+        CalculatorPage(self.driver).elements['key_6'].click()
+        CalculatorPage(self.driver).elements['key_divide'].click()
+        CalculatorPage(self.driver).elements['key_3'].click()
+        CalculatorPage(self.driver).elements['key_equals'].click()
+        assert CalculatorPage(
+            self.driver).elements['calculator-screen'].value == '2'
+
+    def test_history(self):
+
+        CalculatorPage(self.driver).elements['key_2'].click()
+        CalculatorPage(self.driver).elements['key_add'].click()
+        CalculatorPage(self.driver).elements['key_3'].click()
+        CalculatorPage(self.driver).elements['key_equals'].click()
+
+        CalculatorPage(self.driver).elements['key_7'].click()
+        CalculatorPage(self.driver).elements['key_subtract'].click()
+        CalculatorPage(self.driver).elements['key_4'].click()
+        CalculatorPage(self.driver).elements['key_equals'].click()
+
+        CalculatorPage(self.driver).elements['toggle_history_button'].click()

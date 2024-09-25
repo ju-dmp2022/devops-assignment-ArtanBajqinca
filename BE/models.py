@@ -3,13 +3,17 @@ from pydantic import BaseModel
 from calculator_helper import CalculatorHelper
 from enum import Enum
 
+
 class ErrorResponse(BaseModel):
     detail: str
+
+
 class Opertions(str, Enum):
     add = "add"
     subtract = "subtract"
     multiply = "multiply"
     divide = "divide"
+
 
 class Calculation(BaseModel):
     operation: Opertions
@@ -24,13 +28,11 @@ class Calculation(BaseModel):
             Opertions.multiply: calc.multiply,
             Opertions.divide: calc.divide
         }
-        
-        if self.operation == Opertions.divide and self.operand2 == 0:
-            raise ValueError("Division by zero is not allowed")
-        
         result = do[self.operation](self.operand1, self.operand2)
-        response = ResultResponse(result=result)
+        response = ResultResponse()
+        response.result = result
         return response
+
 
 class User(BaseModel):
     username: str
@@ -54,10 +56,10 @@ class User(BaseModel):
             response = None
         return response
 
+
 class ResultResponse(BaseModel):
-    result: float
+    result: float = None
+
 
 class UserResponse(BaseModel):
-    username: str
-
-
+    username: str = None
