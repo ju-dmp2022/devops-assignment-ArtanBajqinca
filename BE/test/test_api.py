@@ -2,6 +2,7 @@ import requests
 
 BASE_URL = "http://localhost:5001"
 
+
 def test_addition():
     response = requests.post(f"{BASE_URL}/calculate", json={
         "operation": "add",
@@ -10,6 +11,7 @@ def test_addition():
     }, timeout=10)
     assert response.status_code == 200
     assert response.json()["result"] == 7
+
 
 def test_subtraction():
     response = requests.post(f"{BASE_URL}/calculate", json={
@@ -20,6 +22,7 @@ def test_subtraction():
     assert response.status_code == 200
     assert response.json()["result"] == 6
 
+
 def test_multiplication():
     response = requests.post(f"{BASE_URL}/calculate", json={
         "operation": "multiply",
@@ -29,6 +32,7 @@ def test_multiplication():
     assert response.status_code == 200
     assert response.json()["result"] == 12
 
+
 def test_division():
     response = requests.post(f"{BASE_URL}/calculate", json={
         "operation": "divide",
@@ -37,6 +41,7 @@ def test_division():
     }, timeout=10)
     assert response.status_code == 200
     assert response.json()["result"] == 4
+
 
 # def test_division_by_zero():
 #     response = requests.post(f"{BASE_URL}/calculate", json={

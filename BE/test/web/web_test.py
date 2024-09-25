@@ -27,7 +27,7 @@ class TestWeb(WebBase):
         RegisterPage(self.driver).elements["password1"].set(password)
         RegisterPage(self.driver).elements["password2"].set(password)
         RegisterPage(self.driver).elements.register.click()
-        time.sleep(3)
+        time.sleep(4)
         assert RegisterPage(
             self.driver).elements["user_name_label"].text == unique_username
 

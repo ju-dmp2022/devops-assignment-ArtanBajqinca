@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites><testsuite name="pytest" errors="2" failures="0" skipped="0" tests="2" time="0.372" timestamp="2024-09-25T17:50:27.107602+02:00" hostname="wlan13997.eduroam.hj.se"><testcase classname="" name="test.test_base" time="0.000"><error message="collection failure">ImportError while importing test module '/Users/artan/Library/CloudStorage/OneDrive-Personal/DMP/DevOps/devops-assignment-ArtanBajqinca/BE/test/test_base.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/importlib/__init__.py:90: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+test/test_base.py:1: in &lt;module&gt;
+    from calculator_helper import CalculatorHelper
+E   ModuleNotFoundError: No module named 'calculator_helper'</error></testcase><testcase classname="" name="test.test_unit" time="0.000"><error message="collection failure">ImportError while importing test module '/Users/artan/Library/CloudStorage/OneDrive-Personal/DMP/DevOps/devops-assignment-ArtanBajqinca/BE/test/test_unit.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/importlib/__init__.py:90: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+/Users/artan/Developer/devops-assignment-ArtanBajqinca/test/test_unit.py:3: in &lt;module&gt;
+    ???
+test/test_base.py:1: in &lt;module&gt;
+    from calculator_helper import CalculatorHelper
+E   ModuleNotFoundError: No module named 'calculator_helper'</error></testcase></testsuite></testsuites>

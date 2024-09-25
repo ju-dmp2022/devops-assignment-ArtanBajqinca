@@ -9,4 +9,6 @@ selenium
 munch
 selenium
 webdriver-manager
-assertpy
+pytest
+requests
+openapi-python-client
