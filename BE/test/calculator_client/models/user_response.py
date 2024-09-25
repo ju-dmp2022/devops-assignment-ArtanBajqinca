@@ -16,7 +16,8 @@ class UserResponse:
     """
 
     username: Union[Unset, str] = UNSET
-    additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
+    additional_properties: Dict[str, Any] = _attrs_field(
+        init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
         username = self.username
